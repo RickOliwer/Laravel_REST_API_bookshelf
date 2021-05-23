@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Genre;
+use App\Http\Resources\Book\BookCollection;
+use App\Http\Resources\Book\BookResource;
 use Facade\FlareClient\Api;
 use Illuminate\Http\Request;
 
@@ -11,13 +13,12 @@ class BooksController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * @param Book $book
+     * 
      * @return \Illuminate\Http\Response
      */
-    public function index(Book $book)
+    public function index()
     {
-        $books = $book->with(['genres', 'authors'])->get();
-        return $books;
+        return BookCollection::collection(Book::all());
     }
 
     /**
@@ -34,12 +35,12 @@ class BooksController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Book $book
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show( Book $book)
     {
-        //
+        return new BookResource($book);
     }
 
     /**

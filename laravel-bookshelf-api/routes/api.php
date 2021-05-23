@@ -17,9 +17,14 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::resource('authors', AuthorsController::class);
-Route::resource('books', BooksController::class);
-Route::resource('genres', GenresController::class);
+Route::apiResource('/authors', AuthorsController::class);
+Route::apiResource('/books', BooksController::class);
+Route::apiResource('/genres', GenresController::class);
+
+Route::group(['prefix' => 'books'], function(){
+    Route::apiResource('/{book}/genres', GenresController::class);
+    Route::apiResource('/{book}/authors', AuthorsController::class);
+});
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
