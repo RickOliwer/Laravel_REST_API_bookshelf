@@ -14,4 +14,15 @@ class book extends Model
         'isbn',
         'description',
     ];
+
+    public function genres()
+    {
+        return $this->belongsToMany(Genre::class, 'books_genres');
+    }
+
+    public function authors()
+    {
+        return $this->belongsToMany(Author::class, 'authors_books');
+
+    }
 }

@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
+use App\Models\Genre;
+use Facade\FlareClient\Api;
 use Illuminate\Http\Request;
 
-class AuthorController extends Controller
+class BooksController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * @param Book $book
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Book $book)
     {
-        //
+        $books = $book->with(['genres', 'authors'])->get();
+        return $books;
     }
 
     /**
@@ -24,7 +28,7 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //return Book::create($request->all());
     }
 
     /**

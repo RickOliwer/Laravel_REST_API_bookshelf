@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Author;
 use Illuminate\Http\Request;
 
-class GenreController extends Controller
+class AuthorsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Author $author)
     {
-        //
+        $authors = $author->with(['books'])->get();
+        return $authors;
     }
 
     /**
@@ -24,7 +26,7 @@ class GenreController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Author::create($request->all());
     }
 
     /**

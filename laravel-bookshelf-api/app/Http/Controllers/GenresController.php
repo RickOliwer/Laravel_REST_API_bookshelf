@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Genre;
 use Illuminate\Http\Request;
 
-class BookController extends Controller
+class GenresController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Genre $genre)
     {
-        //
+        $genres = $genre->with(['books'])->get();
+        return $genres;
     }
 
     /**
@@ -24,7 +26,8 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Genre::create($request->all());
+        
     }
 
     /**
