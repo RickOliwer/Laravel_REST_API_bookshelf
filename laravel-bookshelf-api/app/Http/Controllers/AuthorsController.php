@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Author;
+use App\Models\Book;
+use App\Http\Resources\AuthorResource;
 use Illuminate\Http\Request;
 
 class AuthorsController extends Controller
@@ -12,10 +14,9 @@ class AuthorsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Author $author)
+    public function index(Book $book)
     {
-        $authors = $author->with(['books'])->get();
-        return $authors;
+        return  AuthorResource::collection($book->authors);
     }
 
     /**

@@ -16,10 +16,8 @@ class BookCollection extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
             'Book Title' => $this->title,
             'ISBN' => $this->isbn,
-            'Description' => $this->description,
             'href' => [
                 'link' => route('books.show', $this->id),
             ],
